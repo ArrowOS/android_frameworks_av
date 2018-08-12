@@ -48,16 +48,15 @@ Camera2ClientBase<TClientBase>::Camera2ClientBase(
         const sp<TCamCallbacks>& remoteCallback,
         const String16& clientPackageName,
         const String8& cameraId,
-        int api1CameraId,
         int cameraFacing,
         int clientPid,
         uid_t clientUid,
         int servicePid):
         TClientBase(cameraService, remoteCallback, clientPackageName,
-                cameraId, api1CameraId, cameraFacing, clientPid, clientUid, servicePid),
+                cameraId, cameraFacing, clientPid, clientUid, servicePid),
         mSharedCameraCallbacks(remoteCallback),
         mDeviceVersion(cameraService->getDeviceVersion(TClientBase::mCameraIdStr)),
-        mDeviceActive(false), mApi1CameraId(api1CameraId)
+        mDeviceActive(false)
 {
     ALOGI("Camera %s: Opened. Client: %s (PID %d, UID %d)", cameraId.string(),
             String8(clientPackageName).string(), clientPid, clientUid);
@@ -336,7 +335,7 @@ void Camera2ClientBase<TClientBase>::notifyRepeatingRequestError(long lastFrameN
 
 template <typename TClientBase>
 int Camera2ClientBase<TClientBase>::getCameraId() const {
-    return mApi1CameraId;
+    return std::stoi(TClientBase::mCameraIdStr.string());
 }
 
 template <typename TClientBase>
