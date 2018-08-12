@@ -252,9 +252,7 @@ void Camera2ClientBase<TClientBase>::notifyIdle() {
     if (mDeviceActive) {
         getCameraService()->updateProxyDeviceState(
             hardware::ICameraServiceProxy::CAMERA_STATE_IDLE, TClientBase::mCameraIdStr,
-            TClientBase::mCameraFacing, TClientBase::mClientPackageName,
-            ((mApi1CameraId < 0) ? hardware::ICameraServiceProxy::CAMERA_API_LEVEL_2 :
-             hardware::ICameraServiceProxy::CAMERA_API_LEVEL_1));
+            TClientBase::mCameraFacing, TClientBase::mClientPackageName);
     }
     mDeviceActive = false;
 
@@ -270,9 +268,7 @@ void Camera2ClientBase<TClientBase>::notifyShutter(const CaptureResultExtras& re
     if (!mDeviceActive) {
         getCameraService()->updateProxyDeviceState(
             hardware::ICameraServiceProxy::CAMERA_STATE_ACTIVE, TClientBase::mCameraIdStr,
-            TClientBase::mCameraFacing, TClientBase::mClientPackageName,
-            ((mApi1CameraId < 0) ? hardware::ICameraServiceProxy::CAMERA_API_LEVEL_2 :
-             hardware::ICameraServiceProxy::CAMERA_API_LEVEL_1));
+            TClientBase::mCameraFacing, TClientBase::mClientPackageName);
     }
     mDeviceActive = true;
 
