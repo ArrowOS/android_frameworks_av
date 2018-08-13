@@ -340,9 +340,6 @@ void CameraManagerGlobal::onStatusChangedLocked(
         msg->setString(kCameraIdKey, AString(cameraId));
         msg->post();
     }
-    if (status == hardware::ICameraServiceListener::STATUS_NOT_PRESENT) {
-        mDeviceStatusMap.erase(cameraId);
-    }
 }
 
 } // namespace android

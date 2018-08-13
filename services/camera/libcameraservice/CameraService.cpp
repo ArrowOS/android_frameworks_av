@@ -371,7 +371,6 @@ void CameraService::onDeviceStatusChanged(const String8& id,
             clientToDisconnect->disconnect();
         }
 
-        removeStates(id);
     } else {
         if (oldStatus == StatusInternal::NOT_PRESENT) {
             logDeviceAdded(id, String8::format("Device status changed from %d to %d", oldStatus,
