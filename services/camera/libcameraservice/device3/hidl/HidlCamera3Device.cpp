@@ -178,10 +178,19 @@ status_t HidlCamera3Device::initialize(sp<CameraProviderManager> manager,
             res = manager->getCameraCharacteristics(
                     physicalId, /*overrideForPerfClass*/false, &mPhysicalDeviceInfoMap[physicalId]);
             if (res != OK) {
-                SET_ERR_L("Could not retrieve camera %s characteristics: %s (%d)",
+                CLOGW("Could not retrieve camera %s characteristics: %s (%d)",
                         physicalId.c_str(), strerror(-res), res);
-                session->close();
-                return res;
+                // HACK for ginkgo - check camera id 20 for depth sensor
+                physicalId = "20";
+                CLOGW("Trying physical camera %s if available", physicalId.c_str());
+                res = manager->getCameraCharacteristics(
+                        physicalId, false, &mPhysicalDeviceInfoMap[physicalId]);
+                if (res != OK) {
+                    SET_ERR_L("Could not retrieve camera %s characteristics: %s (%d)",
+                            physicalId.c_str(), strerror(-res), res);
+                    session->close();
+                    return res;
+                }
             }
 
             bool usePrecorrectArray =
