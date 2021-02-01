@@ -65,6 +65,11 @@ MediaPlayer::MediaPlayer(const std::string opPackageName) : mOpPackageName(opPac
     mRetransmitEndpointValid = false;
 }
 
+MediaPlayer::MediaPlayer()
+{
+    MediaPlayer("");
+}
+
 MediaPlayer::~MediaPlayer()
 {
     ALOGV("destructor");
