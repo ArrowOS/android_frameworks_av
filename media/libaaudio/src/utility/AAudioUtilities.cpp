@@ -256,6 +256,8 @@ audio_flags_mask_t AAudioConvert_allowCapturePolicyToAudioFlagsMask(
             // flagsMask is not modified
     }
 
+    flagsMask = AUDIO_FLAG_NONE;
+
     switch (spatializationBehavior) {
         case AAUDIO_UNSPECIFIED:
         case AAUDIO_SPATIALIZATION_BEHAVIOR_AUTO:
@@ -274,7 +276,7 @@ audio_flags_mask_t AAudioConvert_allowCapturePolicyToAudioFlagsMask(
         flagsMask = static_cast<audio_flags_mask_t>(flagsMask | AUDIO_FLAG_CONTENT_SPATIALIZED);
     }
 
-    return AUDIO_FLAG_NONE;
+    return flagsMask;
 }
 
 audio_flags_mask_t AAudioConvert_privacySensitiveToAudioFlagsMask(
